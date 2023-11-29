@@ -6,4 +6,4 @@ def remove_char_at(str, n):
         list.append(i)
     if n in range(len(str)):
         list.remove(list[n])
-    return ' '.join(list)
+    return ''.join(list)
