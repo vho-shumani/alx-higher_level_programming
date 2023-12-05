@@ -19,6 +19,30 @@ size_t list_len(const listint_t *h)
 	return (count);
 }
 /**
+ * reverse_listint - reverses a listint_t linked list.
+ * @head: linked list
+ * Return: a pointer to the first node of the reversed list.
+ */
+listint_t *reverse_listint(listint_t **head)
+{
+	listint_t *tmp = *head, *next = *head;
+
+	if (*head == NULL)
+	{
+		return (NULL);
+	}
+	tmp = tmp->next;
+	(*head)->next = NULL;
+	while (tmp != NULL)
+	{
+		next = tmp->next;
+		tmp->next = *head;
+		*head = tmp;
+		tmp = next;
+	}
+	return (*head);
+}
+/**
  *is_palindrome - determine linked list is palindrome.
  *@head: pointer to linked list
  *Return: 1 if is palindrome, 0 if is not.
@@ -26,28 +50,25 @@ size_t list_len(const listint_t *h)
 int is_palindrome(listint_t **head)
 {
 	listint_t *tmp = *head;
-	int *ptr = (int *)malloc(sizeof(listint_t) * list_len(tmp)), i = 0;
+	size_t count = 1, i = 1;
 
-	if (ptr == NULL)
-	{
-		perror("mallac:");
-	}
 	if (*head == NULL)
-	{
 		return (1);
-	}
-	while (tmp != NULL)
+	while (count < list_len(tmp))
 	{
-		ptr[i] = tmp->n;
 		tmp = tmp->next;
+		count++;
+	}
+	reverse_listint(&tmp);
+	while (tmp->next != NULL)
+	{
+		if (tmp->n != (*head)->n)
+			return (0);
+		tmp = tmp->next;
+		(*head) = (*head)->next;
 		i++;
 	}
-	for (int j = 0, x = i - 1; x >= j; j++, x--)
-	{
-		if (ptr[j] != ptr[x])
-		{
-			return (0);
-		}
-	}
+	if (tmp->n != (*head)->n)
+		return (0);
 	return (1);
 }
