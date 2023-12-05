@@ -17,4 +17,3 @@ void print_python_list_info(PyObject *p)
 		printf("Element %d: %s\n", elem, Py_TYPE(PyList_GetItem(p, i))->tp_name);
 	}
 }
-	}
