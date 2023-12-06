@@ -5,4 +5,4 @@ def weight_average(my_list=[]):
     for i in my_list:
         sum += i[0] * i[1]
         sum2 += i[1]
-    return sum / sum2     
+    return sum / sum2
