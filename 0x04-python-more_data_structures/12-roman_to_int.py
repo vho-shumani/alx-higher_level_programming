@@ -1,0 +1,23 @@
+def roman_to_int(roman_string):
+    roman_dic = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+    sum = 0
+    for i, x in roman_dic.items():
+        for j in roman_string:
+           if i == j: 
+                sum += x
+    return sum
+
+roman_number = "X"
+print("{} = {}".format(roman_number, roman_to_int(roman_number)))
+
+roman_number = "VII"
+print("{} = {}".format(roman_number, roman_to_int(roman_number)))
+
+roman_number = "IX"
+print("{} = {}".format(roman_number, roman_to_int(roman_number)))
+
+roman_number = "LXXXVII"
+print("{} = {}".format(roman_number, roman_to_int(roman_number)))
+
+roman_number = "DCCVII"
+print("{} = {}".format(roman_number, roman_to_int(roman_number)))
