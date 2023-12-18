@@ -6,5 +6,5 @@ def safe_print_division(a, b):
     except Exception:
         sum = None
     finally:
-        print(f'Inside result: {sum}')
+        print("Inside result: {}".format(sum))
         return sum
