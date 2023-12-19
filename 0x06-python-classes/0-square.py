@@ -4,5 +4,3 @@
 class Square:
     """defines a square"""
     pass
-
-print(Square.__doc__)
