@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """
 Module provides a function that divides all elements of matrix.
 
