@@ -1,0 +1,1 @@
+0x0A. Python - Inheritance: focuses on doing tasks on inheretance.
