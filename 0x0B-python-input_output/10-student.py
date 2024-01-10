@@ -12,7 +12,7 @@ class Student:
 
     Method:
         __init__: instatiation of attributes.
-        
+
         to_json: retrieves a dictionary.
     """
     def __init__(self, first_name, last_name, age):
@@ -20,5 +20,11 @@ class Student:
         self.last_name = last_name
         self.age = age
 
-    def to_json(self):
+    def to_json(self, attrs=None):
+        dic = {}
+        if isinstance(attrs, list) and all(isinstance(elem, str) for elem in attrs):
+            for i in attrs:
+                if hasattr(self, i):
+                    dic[i] = getattr(self, i)
+            return dic
         return self.__dict__
