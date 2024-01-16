@@ -1,17 +1,17 @@
 #!/usr/bin/python3
 """Module defines Rectangle class that inherits from Base class"""
-from base import Base
+from models.base import Base
 
 
 class Rectangle(Base):
     """Rectangle class inherits from Base class
-    
+
     Attributes:
         width: width of rectangle.
         height: height of rectangle.
         x: horizontal position of rectangle.
         y: vertical position of rectangle.
-        
+
     Methods:
         init: initailizes attributes.
         get_width: return value of width.
@@ -27,7 +27,7 @@ class Rectangle(Base):
         display: diplay rectangle with character #.
         update: updates the value of attribute.
     """
-    
+
     def __init__(self, width, height, x=0, y=0, id=None):
         """Initializes  Rectangle objects
 
@@ -120,10 +120,10 @@ class Rectangle(Base):
 
     def update(self, *args, **kwargs):
         """Assigns an argument to each attribute:"""
-        if args == None or len(args) == 0:
+        if args is None or len(args) == 0:
             for key, value in kwargs.items():
                 setattr(self, key, value)
-        else:    
+        else:
             try:
                 self.id = args[0]
                 self.__width = args[1]
@@ -132,23 +132,8 @@ class Rectangle(Base):
                 self.__y = args[4]
             except IndexError:
                 pass
-            
+
     def to_dictionary(self):
         """returns the dictionary representation of a Rectangle"""
-        return {key.replace('_Rectangle__', ''): value for key, value in self.__dict__.items()}
-
-r1 = Rectangle(10, 7, 2, 8)
-r2 = Rectangle(2, 4)
-list_rectangles_input = [r1, r2]
-
-Rectangle.save_to_file(list_rectangles_input)
-
-list_rectangles_output = Rectangle.load_from_file()
-
-for rect in list_rectangles_input:
-    print("[{}] {}".format(id(rect), rect))
-
-print("---")
-
-for rect in list_rectangles_output:
-    print("[{}] {}".format(id(rect), rect))
+        return {key.replace('_Rectangle__', ''): value for key,
+                value in self.__dict__.items()}

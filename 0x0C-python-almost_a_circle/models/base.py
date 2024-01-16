@@ -2,6 +2,7 @@
 """Module defines Base class"""
 import json
 
+
 class Base:
     """Base class for other model classes"""
     __nb_objects = 0
@@ -17,7 +18,7 @@ class Base:
         else:
             Base.__nb_objects += 1
             self.id = Base.__nb_objects
-            
+
     @staticmethod
     def to_json_string(list_dictionaries):
         """returns the JSON string representation of list_dictionaries"""
@@ -26,18 +27,19 @@ class Base:
             return json_string
         else:
             return "[]"
-     
+
     @staticmethod
     def from_json_string(json_string):
+        """converts a json string to a list"""
         if json_string is not None:
             return json.loads(json_string)
         else:
             return []
-        
+
     @classmethod
     def save_to_file(cls, list_objs):
         """Writes the JSON string representation of list_objs to a file
-        
+
         Args:
             list_objs (list): A list of instances
         """
@@ -52,11 +54,11 @@ class Base:
         elif 'Square' in f'{cls}':
             with open("Square.json", "w") as f:
                 f.write(json_str)
-                
+
     @classmethod
     def load_from_file(cls):
         """returns a list of instances
-        
+
         Return:
             empty list: if the file doesnt exist
             list of instantiated classes
@@ -69,8 +71,6 @@ class Base:
             elif 'Square' in f'{cls}':
                 with open("Square.json", "r") as f:
                     dic_list = cls.from_json_string(f.read())
-                    return [i for i in dic_list]   
+                    return [i for i in dic_list]
         except FileNotFoundError:
             return []
-        
-
