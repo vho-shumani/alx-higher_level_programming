@@ -1,0 +1,76 @@
+#!/usr/bin/python3
+"""Module defines Base class"""
+import json
+
+class Base:
+    """Base class for other model classes"""
+    __nb_objects = 0
+
+    def __init__(self, id=None):
+        """Constructor to initialize Base objects
+
+        Args:
+            id(int, optional): id for object, has default value of None.
+        """
+        if id is not None:
+            self.id = id
+        else:
+            Base.__nb_objects += 1
+            self.id = Base.__nb_objects
+            
+    @staticmethod
+    def to_json_string(list_dictionaries):
+        """returns the JSON string representation of list_dictionaries"""
+        if list_dictionaries is not None:
+            json_string = json.dumps(list_dictionaries)
+            return json_string
+        else:
+            return "[]"
+     
+    @staticmethod
+    def from_json_string(json_string):
+        if json_string is not None:
+            return json.loads(json_string)
+        else:
+            return []
+        
+    @classmethod
+    def save_to_file(cls, list_objs):
+        """Writes the JSON string representation of list_objs to a file
+        
+        Args:
+            list_objs (list): A list of instances
+        """
+        if list_objs is None:
+            dic_list = []
+        else:
+            dic_list = [i.to_dictionary() for i in list_objs]
+        json_str = cls.to_json_string(dic_list)
+        if 'Rectangle' in f'{cls}':
+            with open("Rectangle.json", "w") as f:
+                f.write(json_str)
+        elif 'Square' in f'{cls}':
+            with open("Square.json", "w") as f:
+                f.write(json_str)
+                
+    @classmethod
+    def load_from_file(cls):
+        """returns a list of instances
+        
+        Return:
+            empty list: if the file doesnt exist
+            list of instantiated classes
+        """
+        try:
+            if 'Rectangle' in f'{cls}':
+                with open("Rectangle.json", "r") as f:
+                    dic_list = cls.from_json_string(f.read())
+                    return [i for i in dic_list]
+            elif 'Square' in f'{cls}':
+                with open("Square.json", "r") as f:
+                    dic_list = cls.from_json_string(f.read())
+                    return [i for i in dic_list]   
+        except FileNotFoundError:
+            return []
+        
+
