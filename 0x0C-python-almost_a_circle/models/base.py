@@ -56,26 +56,6 @@ class Base:
                 f.write(json_str)
 
     @classmethod
-    def load_from_file(cls):
-        """returns a list of instances
-
-        Return:
-            empty list: if the file doesnt exist
-            list of instantiated classes
-        """
-        try:
-            if 'Rectangle' in f'{cls}':
-                with open("Rectangle.json", "r") as f:
-                    dic_list = cls.from_json_string(f.read())
-                    return [i for i in dic_list]
-            elif 'Square' in f'{cls}':
-                with open("Square.json", "r") as f:
-                    dic_list = cls.from_json_string(f.read())
-                    return [i for i in dic_list]
-        except FileNotFoundError:
-            return []
-
-    @classmethod
     def create(cls, **dictionary):
         """Returns a instance with all attributes set
 
@@ -86,3 +66,23 @@ class Base:
             dummy = cls(1, 1)
             dummy.update(**dictionary)
             return dummy
+
+    @classmethod
+    def load_from_file(cls):
+        """returns a list of instances
+
+        Return:
+            empty list: if the file doesnt exist
+            list of instantiated classes
+        """
+        try:
+            if 'Rectangle' in f'{cls}':
+                with open("Rectangle.json", "r") as f:
+                    dic_list = Base.from_json_string(f.read())
+                    return [cls.create(**i) for i in dic_list]
+            elif 'Square' in f'{cls}':
+                with open("Square.json", "r") as f:
+                    dic_list = Base.from_json_string(f.read())
+                    return [cls.create(**i) for i in dic_list]
+        except FileNotFoundError:
+            return []
