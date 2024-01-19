@@ -82,6 +82,7 @@ class Base:
         Args:
             dictionary: attributes to initialize
         """
-        dummy = cls(1, 1)
-        dummy.update(**dictionary)
-        return dummy
+        if dictionary is not None and dictionary != {}:
+            dummy = cls(1, 1)
+            dummy.update(**dictionary)
+            return dummy
