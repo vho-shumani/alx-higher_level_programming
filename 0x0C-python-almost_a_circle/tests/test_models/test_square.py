@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 """module provides test case for square class"""
-
-
 import io
 import sys
 import unittest
