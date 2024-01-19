@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Module defines Base class"""
 import json
+import csv
 
 
 class Base:
@@ -83,6 +84,55 @@ class Base:
             elif 'Square' in f'{cls}':
                 with open("Square.json", "r") as f:
                     dic_list = Base.from_json_string(f.read())
+                    return [cls.create(**i) for i in dic_list]
+        except FileNotFoundError:
+            return []
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """serializes in CVs
+
+        list_objs: list of instances
+        """
+        if 'Rectangle' in f'{cls}':
+            with open("Rectangle.json", "w") as f:
+                if list_objs is None or len(list_objs) == 0:
+                    f.write("[]")
+                format = ["id", "width", "height", "x", "y"]
+                msg = csv.DictWriter(f, fieldnames=format)
+                for obj in list_objs:
+                    msg.writerow(obj.to_dictionary())
+        elif 'Square' in f'{cls}':
+            with open("Square.json", "w") as f:
+                if list_objs is None or len(list_objs) == 0:
+                    f.write("[]")
+                format = ["id", "size", "x", "y"]
+                msg = csv.DictWriter(f, fieldnames=format)
+                for obj in list_objs:
+                    msg.writerow(obj.to_dictionary())
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """Return a list of classes instantiated from a CSV file.
+
+        Return:
+            empty list: if the file doesnt exist
+            list of instantiated classes
+        """
+        try:
+            if 'Rectangle' in f'{cls}':
+                with open("Rectangle.json", "r") as f:
+                    format = ["id", "width", "height", "x", "y"]
+                    dic_list = csv.DictReader(f, fieldnames=format)
+                    dic_list = [dict([key, int(val)] for key, val in i.items())
+                                for i in dic_list]
+                    return [cls.create(**i) for i in dic_list]
+            elif 'Square' in f'{cls}':
+                with open("Square.json", "r") as f:
+                    format = ["id", "size", "x", "y"]
+                    dic_list = csv.DictReader(f, fieldnames=format)
+                    dic_list = [dict([key, int(val)] for key, val in i.items())
+                                for i in dic_list]
                     return [cls.create(**i) for i in dic_list]
         except FileNotFoundError:
             return []
