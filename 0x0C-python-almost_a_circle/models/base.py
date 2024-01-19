@@ -74,3 +74,14 @@ class Base:
                     return [i for i in dic_list]
         except FileNotFoundError:
             return []
+
+    @classmethod
+    def create(cls, **dictionary):
+        """Returns a instance with all attributes set
+
+        Args:
+            dictionary: attributes to initialize
+        """
+        dummy = cls(1, 1)
+        dummy.update(**dictionary)
+        return dummy
