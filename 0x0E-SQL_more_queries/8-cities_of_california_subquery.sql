@@ -6,4 +6,5 @@ WHERE cities.state_id = (
     FROM states
     WHERE name = 'California'
 )
+AND cities.state_id = states.id
 ORDER BY cities.id ASC;
