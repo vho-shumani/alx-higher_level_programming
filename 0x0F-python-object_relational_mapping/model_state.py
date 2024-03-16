@@ -2,12 +2,11 @@
 """
 module defines a State and base class
 """
-import sys
 from sqlalchemy import create_engine, Column, Integer, String, MetaData
 from sqlalchemy.ext.declarative import declarative_base
    
-metadata = MetaData()
-Base = declarative_base(metadata=mymetadata)
+md = MetaData()
+Base = declarative_base(metadata=md)
 
 class State(Base):
     """
