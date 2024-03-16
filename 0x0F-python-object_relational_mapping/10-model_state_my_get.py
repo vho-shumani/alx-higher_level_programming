@@ -16,7 +16,7 @@ if __name__ == "__main__":
     session = Session()
 
     state_name = sys.argv[4]
-    states = session.query(State).filter(State.name == state_name).one()
+    states = session.query(State).filter(State.name == state_name).one_or_none()
     if states:
         print(states.id)
     else:
