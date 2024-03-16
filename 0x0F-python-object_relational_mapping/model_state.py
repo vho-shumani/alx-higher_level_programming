@@ -5,9 +5,7 @@ module defines a State and base class
 from sqlalchemy import create_engine, Column, Integer, String, MetaData
 from sqlalchemy.ext.declarative import declarative_base
 
-md = MetaData()
-Base = declarative_base(metadata=md)
-
+Base = declarative_base()
 
 class State(Base):
     """
