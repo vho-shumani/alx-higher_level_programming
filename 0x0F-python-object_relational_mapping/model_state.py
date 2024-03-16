@@ -1,13 +1,11 @@
 #!/usr/bin/python3
 """module defines a State class"""
 import sys
-from sqlalchemy import create_engine, Column, Integer, String
+from sqlalchemy import create_engine, Column, Integer, String, MetaData
 from sqlalchemy.orm import declarative_base
-    
-db_url = f"mysql://{sys.argv[1]}:{sys.argv[2]}@localhost:3306/{sys.argv[3]}"
-engine = create_engine(db_url)
-Base = declarative_base()
-Base.metadata.create_all(engine)
+   
+metadata = MetaData()
+Base = declarative_base(metadata=mymetadata)
 
 class State(Base):
     """define a state"""
