@@ -3,6 +3,8 @@
 http://0.0.0.0:5000/search_user with the letter as a parameter."""
 import sys
 import requests
+
+
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         lett = ""
@@ -12,7 +14,7 @@ if __name__ == "__main__":
         req = requests.post('http://0.0.0.0:5000/search_user', data={'q': lett})
         json_data = req.json()
         if json_data:
-            print(f'[{json_data.get("id"}] {json_data.get("name")}')
+            print(f'[{json_data.get("id")}] {json_data.get("name")}')
         else:
             print('No result')
     except requests.exceptions.JSONDecodeError:
