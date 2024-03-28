@@ -11,7 +11,8 @@ if __name__ == "__main__":
     else:
         lett = sys.argv[1]
     try:
-        req = requests.post('http://0.0.0.0:5000/search_user', data={'q': lett})
+        url = 'http://0.0.0.0:5000/search_user'
+        req = requests.post(url, data={'q': lett})
         json_data = req.json()
         if json_data:
             print(f'[{json_data.get("id")}] {json_data.get("name")}')
