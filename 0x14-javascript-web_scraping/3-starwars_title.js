@@ -6,7 +6,7 @@ request.get(`https://swapi-api.alx-tools.com/api/films/${process.argv[2]}`, (err
     console.error(err);
   } else {
     const movie = JSON.parse(body);
-    console.log(movie.title)
+    console.log(movie.title);
   }
 }
-)
+);
