@@ -7,13 +7,14 @@ request.get(url, (err, response, body) => {
     console.error(err);
   } else {
     const movieData = JSON.parse(body);
-    movieData.characters.forEach((characterUrl) => {
+    const urls = movieData.characters;
+    async.mapSeries(urls, (characterUrl, callback) => {
       request.get(characterUrl, (err, response, body) => {
         if (err) {
-          console.error(err);
+          callback(err);
         } else {
           const people = JSON.parse(body);
-          console.log(people.name);
+          callback(null, people.name);
         }
       });
     });
